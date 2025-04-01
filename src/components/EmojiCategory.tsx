@@ -143,7 +143,7 @@ export const EmojiCategory = React.memo(
 
     const keyExtractor = React.useCallback((item: JsonEmoji) => item.name, [])
 
-    const [maxIndex, setMaxIndex] = React.useState(300)
+    const [maxIndex, setMaxIndex] = React.useState(minimalEmojisAmountToDisplay)
 
     // with InteractionManager we can show emojis after interaction is finished
     // It helps with delay during category change animation
