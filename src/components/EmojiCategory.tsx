@@ -57,6 +57,8 @@ export const EmojiCategory = React.memo(
 
     const { setKeyboardState, keyboardState } = useKeyboardStore()
 
+    const initialRender = React.useRef(false)
+
     const [empty, setEmpty] = React.useState<JsonEmoji[]>([])
 
     React.useEffect(() => {
@@ -155,13 +157,16 @@ export const EmojiCategory = React.memo(
 
     // To prevent situation with zero maxIndex on next picker openings
     React.useEffect(() => {
+      if (initialRender.current) return
+
+      initialRender.current = true
       const task = requestAnimationFrame(() => {
         if (maxIndex === 0 && data.length) {
           setMaxIndex(minimalEmojisAmountToDisplay)
         }
       })
       return () => cancelAnimationFrame(task)
-    }, [])
+    }, [data.length, maxIndex, minimalEmojisAmountToDisplay])
 
     const onEndReached = () => {
       if (maxIndex <= data.length) {
