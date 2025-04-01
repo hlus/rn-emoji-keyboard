@@ -2,7 +2,6 @@ import * as React from 'react'
 
 import { StyleSheet, View, Text, FlatList, type ListRenderItemInfo } from 'react-native'
 import {
-  CATEGORIES,
   type CategoryPosition,
   type EmojisByCategory,
   type EmojiSizes,
@@ -31,7 +30,6 @@ export const EmojiCategory = React.memo(
   ({
     item: { title, data },
     setKeyboardScrollOffsetY,
-    activeCategoryIndex,
   }: {
     item: EmojisByCategory
     setKeyboardScrollOffsetY: React.Dispatch<React.SetStateAction<number>>
@@ -170,12 +168,6 @@ export const EmojiCategory = React.memo(
         setMaxIndex(data.length)
       }
     }
-
-    // React.useEffect(() => {
-    //   if (CATEGORIES[activeCategoryIndex] !== title) {
-    //     setMaxIndex(0)
-    //   }
-    // }, [activeCategoryIndex, title])
 
     const flatListData = data.slice(0, maxIndex)
 
